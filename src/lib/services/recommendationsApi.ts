@@ -277,7 +277,6 @@ class RecommendationsApi {
     // Reduced delay for better performance
     await new Promise(resolve => setTimeout(resolve, 100));
     
-    const timestamp = Date.now();
     const allRecommendations = [];
 
     try {

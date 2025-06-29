@@ -6,6 +6,14 @@ declare module 'next-auth' {
   interface User {
     bio?: string | null;
   }
+  interface Session {
+    user: {
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+      bio?: string | null;
+    };
+  }
 }
 declare module 'next-auth/jwt' {
   interface JWT {
@@ -59,7 +67,7 @@ export const authOptions: NextAuthOptions = {
       if (session.user) {
         session.user.name = token.name as string;
         session.user.image = token.picture as string;
-        (session.user as any).bio = token.bio as string;
+        session.user.bio = token.bio as string;
       }
       return session;
     },

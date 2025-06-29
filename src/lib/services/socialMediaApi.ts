@@ -15,6 +15,7 @@ const mockTwitterData = [
     author: '@TechNews',
     likes: 1247,
     retweets: 892,
+    comments: 0,
     hashtags: ['#AI', '#QuantumComputing', '#TechNews']
   },
   {
@@ -30,6 +31,7 @@ const mockTwitterData = [
     author: '@TravelLover',
     likes: 2156,
     retweets: 1342,
+    comments: 0,
     hashtags: ['#GrandCanyon', '#Sunset', '#Travel', '#Nature']
   },
   {
@@ -45,6 +47,7 @@ const mockTwitterData = [
     author: '@BakingPro',
     likes: 892,
     retweets: 445,
+    comments: 0,
     hashtags: ['#Baking', '#Sourdough', '#Foodie']
   },
   {
@@ -60,6 +63,7 @@ const mockTwitterData = [
     author: '@FootballFan',
     likes: 5678,
     retweets: 2345,
+    comments: 0,
     hashtags: ['#Messi', '#Football', '#GOAT']
   }
 ];
@@ -77,6 +81,7 @@ const mockInstagramData = [
     type: 'social' as const,
     author: '@DevLife',
     likes: 1234,
+    retweets: 0,
     comments: 89,
     hashtags: ['#Coding', '#Coffee', '#DeveloperLife', '#React']
   },
@@ -92,6 +97,7 @@ const mockInstagramData = [
     type: 'social' as const,
     author: '@ArtExplorer',
     likes: 2156,
+    retweets: 0,
     comments: 156,
     hashtags: ['#StreetArt', '#Berlin', '#Art', '#Travel']
   },
@@ -107,6 +113,7 @@ const mockInstagramData = [
     type: 'social' as const,
     author: '@ChefLife',
     likes: 3456,
+    retweets: 0,
     comments: 234,
     hashtags: ['#Pasta', '#Homemade', '#Cooking', '#Italian']
   }
@@ -125,6 +132,7 @@ const mockLinkedInData = [
     type: 'social' as const,
     author: 'Sarah Johnson',
     likes: 456,
+    retweets: 0,
     comments: 78,
     hashtags: ['#RemoteWork', '#FutureOfWork', '#Leadership']
   },
@@ -140,6 +148,7 @@ const mockLinkedInData = [
     type: 'social' as const,
     author: 'Michael Chen',
     likes: 789,
+    retweets: 0,
     comments: 123,
     hashtags: ['#Sustainability', '#Business', '#Innovation']
   }
@@ -154,8 +163,13 @@ export interface SocialMediaPost extends ContentItem {
 }
 
 class SocialMediaApi {
+  // Helper function to calculate engagement safely
+  private calculateEngagement(post: SocialMediaPost): number {
+    return post.likes + (post.retweets || 0) + (post.comments || 0);
+  }
+
   // Fetch posts from specific hashtags
-  async fetchPostsByHashtag(hashtag: string, platform: 'twitter' | 'instagram' | 'linkedin' = 'twitter'): Promise<SocialMediaPost[]> {
+  async fetchPostsByHashtag(hashtag: string, platform: 'twitter' | 'instagram' | 'linkedin' | 'all' = 'twitter'): Promise<SocialMediaPost[]> {
     try {
       // Reduced delay for better performance
       await new Promise(resolve => setTimeout(resolve, 100));
@@ -183,7 +197,7 @@ class SocialMediaApi {
   }
 
   // Fetch posts from specific user profiles
-  async fetchPostsByUser(username: string, platform: 'twitter' | 'instagram' | 'linkedin' = 'twitter'): Promise<SocialMediaPost[]> {
+  async fetchPostsByUser(username: string, platform: 'twitter' | 'instagram' | 'linkedin' | 'all' = 'twitter'): Promise<SocialMediaPost[]> {
     try {
       // Reduced delay for better performance
       await new Promise(resolve => setTimeout(resolve, 100));
@@ -223,8 +237,8 @@ class SocialMediaApi {
       
       // Return posts sorted by engagement (likes + retweets + comments)
       return allPosts.sort((a, b) => {
-        const engagementA = a.likes + (a.retweets || 0) + (a.comments || 0);
-        const engagementB = b.likes + (b.retweets || 0) + (b.comments || 0);
+        const engagementA = this.calculateEngagement(a);
+        const engagementB = this.calculateEngagement(b);
         return engagementB - engagementA;
       });
       

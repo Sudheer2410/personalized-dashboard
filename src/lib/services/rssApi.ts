@@ -268,7 +268,7 @@ const getCategoryImage = (category: string, index: number): string => {
 };
 
 // Helper function to fetch RSS with timeout (reduced timeout for better performance)
-const fetchWithTimeout = async (url: string, timeout: number = 3000): Promise<{ items: RSSItem[] }> => {
+const fetchWithTimeout = async (url: string, category: string, timeout: number = 3000): Promise<{ items: RSSItem[] }> => {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), timeout);
 
@@ -361,7 +361,7 @@ export const rssApi = {
         const feeds = RSS_FEEDS[category as keyof typeof RSS_FEEDS] || [];
         
         for (const feed of feeds) {
-          const promise = fetchWithTimeout(feed)
+          const promise = fetchWithTimeout(feed, category)
             .then(items => {
               if (items.items.length > 0) {
                 hasSuccessfulFeeds = true;
@@ -430,24 +430,28 @@ export const rssApi = {
       
       // Try to fetch from external feeds first
       const feedPromises = allFeeds.map(feed => 
-        fetchWithTimeout(feed)
-          .then(items => {
-            if (items.items.length > 0) {
-              hasSuccessfulFeeds = true;
-              const matchingItems = items.items.filter((item: RSSItem) => 
-                item.title.toLowerCase().includes(query.toLowerCase()) ||
-                item.description.toLowerCase().includes(query.toLowerCase())
-              );
-              const categoryItems = matchingItems.map((item: RSSItem) => ({
-                ...item,
-                category: Object.keys(RSS_FEEDS).find(category => RSS_FEEDS[category as keyof typeof RSS_FEEDS].includes(feed)) || 'Unknown'
-              }));
-              allNews.push(...categoryItems);
-            }
-          })
-          .catch(error => {
-            console.warn(`Failed to search RSS feed ${feed}:`, error);
-          })
+        // Find the category for this feed
+        {
+          const category = Object.keys(RSS_FEEDS).find(category => RSS_FEEDS[category as keyof typeof RSS_FEEDS].includes(feed)) || 'Unknown';
+          return fetchWithTimeout(feed, category)
+            .then(items => {
+              if (items.items.length > 0) {
+                hasSuccessfulFeeds = true;
+                const matchingItems = items.items.filter((item: RSSItem) => 
+                  item.title.toLowerCase().includes(query.toLowerCase()) ||
+                  item.description.toLowerCase().includes(query.toLowerCase())
+                );
+                const categoryItems = matchingItems.map((item: RSSItem) => ({
+                  ...item,
+                  category: category
+                }));
+                allNews.push(...categoryItems);
+              }
+            })
+            .catch(error => {
+              console.warn(`Failed to search RSS feed ${feed}:`, error);
+            });
+        }
       );
       
       await Promise.allSettled(feedPromises);

@@ -1,7 +1,12 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { newsApi, tmdbApi, mockApi } from '../services/api';
 import { recommendationsApi } from '../services/recommendationsApi';
 import { socialMediaApi } from '../services/socialMediaApi';
+
+// Define the root state type for proper typing
+interface RootState {
+  content: ContentState;
+}
 
 export interface ContentItem {
   id: string;
@@ -119,10 +124,14 @@ export const fetchContent = createAsyncThunk(
 );
 
 // Fetch personalized recommendations with caching
-export const fetchRecommendations = createAsyncThunk(
+export const fetchRecommendations = createAsyncThunk<
+  ContentItem[],
+  number | undefined,
+  { state: RootState }
+>(
   'content/fetchRecommendations',
-  async (page: number = 1, { getState }: { getState: () => { content: ContentState } }) => {
-    const state = getState() as { content: ContentState };
+  async (page = 1, { getState }) => {
+    const state = getState();
     const { lastFetched, cacheDuration, recommendations } = state.content;
     
     // Check if we have cached data and it's still valid
@@ -146,13 +155,15 @@ export const fetchRecommendations = createAsyncThunk(
 );
 
 // Fetch social media posts with caching
-export const fetchSocialPosts = createAsyncThunk(
+export const fetchSocialPosts = createAsyncThunk<
+  ContentItem[],
+  { hashtag?: string; platform?: 'twitter' | 'instagram' | 'linkedin'; category?: string } | undefined,
+  { state: RootState }
+>(
   'content/fetchSocialPosts',
-  async (
-    { hashtag, platform, category }: { hashtag?: string; platform?: 'twitter' | 'instagram' | 'linkedin'; category?: string } = {},
-    { getState }: { getState: () => { content: ContentState } }
-  ) => {
-    const state = getState() as { content: ContentState };
+  async (params = {}, { getState }) => {
+    const { hashtag, platform, category } = params;
+    const state = getState();
     const { lastFetched, cacheDuration, socialPosts } = state.content;
     
     // Check if we have cached data and it's still valid (only if no filters applied)
@@ -199,7 +210,7 @@ export const searchContent = createAsyncThunk(
       let movieResults: ContentItem[] = [];
       try {
         movieResults = await tmdbApi.searchMovies(query, page);
-      } catch (error) {
+      } catch {
         console.warn('TMDB search not available');
       }
       
@@ -238,7 +249,7 @@ const contentSlice = createSlice({
     clearSocialPosts: (state) => {
       state.socialPosts = [];
     },
-    addToFavorites: (state, action: PayloadAction<string>) => {
+    addToFavorites: () => {
       // This will be handled by favorites slice
     },
   },

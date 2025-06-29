@@ -1,0 +1,124 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "close": "Cerrar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "refresh": "Actualizar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "previous": "Anterior"
+  },
+  "auth": {
+    "signIn": "Iniciar Sesión",
+    "signOut": "Cerrar Sesión",
+    "username": "Nombre de usuario",
+    "password": "Contraseña",
+    "email": "Correo electrónico",
+    "invalidCredentials": "Nombre de usuario o contraseña inválidos",
+    "signingIn": "Iniciando sesión...",
+    "demoCredentials": "Demo: user / password"
+  },
+  "dashboard": {
+    "title": "Tu Feed Personalizado",
+    "searchResults": "Resultados de búsqueda para \"{{query}}\"",
+    "foundResults": "Se encontraron {{count}} resultados",
+    "showingCategories": "Mostrando contenido de tus categorías seleccionadas: {{categories}}",
+    "noContent": "No hay contenido disponible",
+    "noContentDescription": "Intenta agregar más categorías o revisa más tarde para nuevo contenido.",
+    "noResults": "No se encontraron resultados",
+    "noResultsDescription": "Intenta ajustar tus términos de búsqueda o navega por diferentes categorías.",
+    "endOfContent": "Has llegado al final del contenido.",
+    "loadingContent": "Cargando contenido..."
+  },
+  "navigation": {
+    "dashboard": "Panel",
+    "trending": "Tendencias",
+    "favorites": "Favoritos",
+    "profile": "Perfil",
+    "settings": "Configuración"
+  },
+  "sidebar": {
+    "categories": "Categorías",
+    "news": "Noticias",
+    "technology": "Tecnología",
+    "science": "Ciencia",
+    "business": "Negocios",
+    "entertainment": "Entretenimiento",
+    "sports": "Deportes",
+    "health": "Salud",
+    "politics": "Política"
+  },
+  "topbar": {
+    "searchPlaceholder": "Buscar contenido...",
+    "notifications": "Notificaciones",
+    "toggleTheme": "Cambiar tema",
+    "userMenu": "Menú de usuario"
+  },
+  "content": {
+    "readMore": "Leer Más",
+    "share": "Compartir",
+    "like": "Me gusta",
+    "comment": "Comentar",
+    "bookmark": "Marcar",
+    "published": "Publicado {{date}}",
+    "author": "Por {{author}}",
+    "source": "Fuente: {{source}}"
+  },
+  "profile": {
+    "title": "Perfil",
+    "personalInfo": "Información Personal",
+    "name": "Nombre",
+    "bio": "Biografía",
+    "location": "Ubicación",
+    "website": "Sitio web",
+    "updateProfile": "Actualizar Perfil",
+    "profileUpdated": "Perfil actualizado exitosamente",
+    "preferences": "Preferencias",
+    "language": "Idioma",
+    "theme": "Tema",
+    "notifications": "Notificaciones",
+    "emailNotifications": "Notificaciones por Email",
+    "pushNotifications": "Notificaciones Push"
+  },
+  "settings": {
+    "title": "Configuración",
+    "general": "General",
+    "appearance": "Apariencia",
+    "notifications": "Notificaciones",
+    "privacy": "Privacidad",
+    "language": "Idioma",
+    "theme": "Tema",
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema",
+    "autoRefresh": "Actualización Automática",
+    "enableAutoRefresh": "Habilitar actualización automática",
+    "refreshInterval": "Intervalo de actualización (minutos)",
+    "saveSettings": "Guardar Configuración",
+    "settingsSaved": "Configuración guardada exitosamente"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "fr": "Français",
+    "de": "Deutsch",
+    "te": "తెలుగు",
+    "hi": "हिन्दी"
+  },
+  "realTime": {
+    "newContent": "Nuevo contenido disponible",
+    "refreshing": "Actualizando...",
+    "connectionStatus": "Estado de Conexión",
+    "connected": "Conectado",
+    "disconnected": "Desconectado",
+    "reconnecting": "Reconectando..."
+  }
+} 

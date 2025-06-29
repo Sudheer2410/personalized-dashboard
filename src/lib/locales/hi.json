@@ -1,0 +1,124 @@
+{
+  "common": {
+    "loading": "लोड हो रहा है...",
+    "error": "त्रुटि",
+    "success": "सफलता",
+    "cancel": "रद्द करें",
+    "save": "सहेजें",
+    "delete": "हटाएं",
+    "edit": "संपादित करें",
+    "close": "बंद करें",
+    "search": "खोजें",
+    "filter": "फ़िल्टर",
+    "sort": "क्रमबद्ध करें",
+    "refresh": "ताज़ा करें",
+    "back": "वापस",
+    "next": "अगला",
+    "previous": "पिछला"
+  },
+  "auth": {
+    "signIn": "साइन इन",
+    "signOut": "साइन आउट",
+    "username": "उपयोगकर्ता नाम",
+    "password": "पासवर्ड",
+    "email": "ईमेल",
+    "invalidCredentials": "अमान्य उपयोगकर्ता नाम या पासवर्ड",
+    "signingIn": "साइन इन हो रहा है...",
+    "demoCredentials": "डेमो: user / password"
+  },
+  "dashboard": {
+    "title": "आपका व्यक्तिगत फीड",
+    "searchResults": "\"{{query}}\" के लिए खोज परिणाम",
+    "foundResults": "{{count}} परिणाम मिले",
+    "showingCategories": "आपके चयनित श्रेणियों से सामग्री दिखा रहा है: {{categories}}",
+    "noContent": "कोई सामग्री उपलब्ध नहीं है",
+    "noContentDescription": "अधिक श्रेणियां जोड़ने का प्रयास करें या नई सामग्री के लिए बाद में जांचें।",
+    "noResults": "कोई परिणाम नहीं मिला",
+    "noResultsDescription": "अपने खोज शब्दों को समायोजित करने का प्रयास करें या विभिन्न श्रेणियों को ब्राउज़ करें।",
+    "endOfContent": "आप सामग्री के अंत तक पहुंच गए हैं।",
+    "loadingContent": "सामग्री लोड हो रही है..."
+  },
+  "navigation": {
+    "dashboard": "डैशबोर्ड",
+    "trending": "ट्रेंडिंग",
+    "favorites": "पसंदीदा",
+    "profile": "प्रोफ़ाइल",
+    "settings": "सेटिंग्स"
+  },
+  "sidebar": {
+    "categories": "श्रेणियां",
+    "news": "समाचार",
+    "technology": "प्रौद्योगिकी",
+    "science": "विज्ञान",
+    "business": "व्यवसाय",
+    "entertainment": "मनोरंजन",
+    "sports": "खेल",
+    "health": "स्वास्थ्य",
+    "politics": "राजनीति"
+  },
+  "topbar": {
+    "searchPlaceholder": "सामग्री खोजें...",
+    "notifications": "सूचनाएं",
+    "toggleTheme": "थीम बदलें",
+    "userMenu": "उपयोगकर्ता मेनू"
+  },
+  "content": {
+    "readMore": "और पढ़ें",
+    "share": "साझा करें",
+    "like": "पसंद",
+    "comment": "टिप्पणी",
+    "bookmark": "बुकमार्क",
+    "published": "प्रकाशित {{date}}",
+    "author": "{{author}} द्वारा",
+    "source": "स्रोत: {{source}}"
+  },
+  "profile": {
+    "title": "प्रोफ़ाइल",
+    "personalInfo": "व्यक्तिगत जानकारी",
+    "name": "नाम",
+    "bio": "जीवनी",
+    "location": "स्थान",
+    "website": "वेबसाइट",
+    "updateProfile": "प्रोफ़ाइल अपडेट करें",
+    "profileUpdated": "प्रोफ़ाइल सफलतापूर्वक अपडेट किया गया",
+    "preferences": "प्राथमिकताएं",
+    "language": "भाषा",
+    "theme": "थीम",
+    "notifications": "सूचनाएं",
+    "emailNotifications": "ईमेल सूचनाएं",
+    "pushNotifications": "पुश सूचनाएं"
+  },
+  "settings": {
+    "title": "सेटिंग्स",
+    "general": "सामान्य",
+    "appearance": "दिखावट",
+    "notifications": "सूचनाएं",
+    "privacy": "गोपनीयता",
+    "language": "भाषा",
+    "theme": "थीम",
+    "light": "हल्का",
+    "dark": "गहरा",
+    "system": "सिस्टम",
+    "autoRefresh": "स्वचालित ताज़ा करें",
+    "enableAutoRefresh": "स्वचालित ताज़ा करना सक्षम करें",
+    "refreshInterval": "ताज़ा करने का अंतराल (मिनट)",
+    "saveSettings": "सेटिंग्स सहेजें",
+    "settingsSaved": "सेटिंग्स सफलतापूर्वक सहेजी गईं"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "fr": "Français",
+    "de": "Deutsch",
+    "te": "తెలుగు",
+    "hi": "हिन्दी"
+  },
+  "realTime": {
+    "newContent": "नई सामग्री उपलब्ध है",
+    "refreshing": "ताज़ा हो रहा है...",
+    "connectionStatus": "कनेक्शन स्थिति",
+    "connected": "कनेक्टेड",
+    "disconnected": "डिस्कनेक्टेड",
+    "reconnecting": "पुनः कनेक्ट हो रहा है..."
+  }
+} 

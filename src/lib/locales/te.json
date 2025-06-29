@@ -1,0 +1,124 @@
+{
+  "common": {
+    "loading": "లోడ్ అవుతోంది...",
+    "error": "లోపం",
+    "success": "విజయం",
+    "cancel": "రద్దు",
+    "save": "సేవ్",
+    "delete": "తొలగించు",
+    "edit": "సవరించు",
+    "close": "మూసివేయి",
+    "search": "వెతుకు",
+    "filter": "ఫిల్టర్",
+    "sort": "క్రమబద్ధం",
+    "refresh": "రిఫ్రెష్",
+    "back": "వెనుకకు",
+    "next": "తదుపరి",
+    "previous": "మునుపటి"
+  },
+  "auth": {
+    "signIn": "సైన్ ఇన్",
+    "signOut": "సైన్ అవుట్",
+    "username": "వినియోగదారు పేరు",
+    "password": "పాస్‌వర్డ్",
+    "email": "ఇమెయిల్",
+    "invalidCredentials": "చెల్లని వినియోగదారు పేరు లేదా పాస్‌వర్డ్",
+    "signingIn": "సైన్ ఇన్ అవుతోంది...",
+    "demoCredentials": "డెమో: user / password"
+  },
+  "dashboard": {
+    "title": "మీ వ్యక్తిగత ఫీడ్",
+    "searchResults": "\"{{query}}\" కోసం శోధన ఫలితాలు",
+    "foundResults": "{{count}} ఫలితాలు దొరికాయి",
+    "showingCategories": "మీ ఎంచుకున్న వర్గాల నుండి కంటెంట్ చూపిస్తోంది: {{categories}}",
+    "noContent": "కంటెంట్ అందుబాటులో లేదు",
+    "noContentDescription": "మరిన్ని వర్గాలను జోడించడానికి ప్రయత్నించండి లేదా కొత్త కంటెంట్ కోసం తర్వాత తనిఖీ చేయండి.",
+    "noResults": "ఫలితాలు దొరకలేదు",
+    "noResultsDescription": "మీ శోధన పదాలను సర్దుబాటు చేయడానికి ప్రయత్నించండి లేదా వివిధ వర్గాలను బ్రౌజ్ చేయండి.",
+    "endOfContent": "మీరు కంటెంట్ ముగింపుకు చేరుకున్నారు.",
+    "loadingContent": "కంటెంట్ లోడ్ అవుతోంది..."
+  },
+  "navigation": {
+    "dashboard": "డాష్‌బోర్డ్",
+    "trending": "ట్రెండింగ్",
+    "favorites": "ఇష్టమైనవి",
+    "profile": "ప్రొఫైల్",
+    "settings": "సెట్టింగ్‌లు"
+  },
+  "sidebar": {
+    "categories": "వర్గాలు",
+    "news": "వార్తలు",
+    "technology": "టెక్నాలజీ",
+    "science": "విజ్ఞానం",
+    "business": "వ్యాపారం",
+    "entertainment": "వినోదం",
+    "sports": "క్రీడలు",
+    "health": "ఆరోగ్యం",
+    "politics": "రాజకీయాలు"
+  },
+  "topbar": {
+    "searchPlaceholder": "కంటెంట్ వెతుకు...",
+    "notifications": "నోటిఫికేషన్‌లు",
+    "toggleTheme": "థీమ్ మార్చు",
+    "userMenu": "వినియోగదారు మెనూ"
+  },
+  "content": {
+    "readMore": "మరింత చదవండి",
+    "share": "షేర్ చేయండి",
+    "like": "ఇష్టం",
+    "comment": "వ్యాఖ్య",
+    "bookmark": "బుక్‌మార్క్",
+    "published": "ప్రచురించబడింది {{date}}",
+    "author": "{{author}} చే",
+    "source": "మూలం: {{source}}"
+  },
+  "profile": {
+    "title": "ప్రొఫైల్",
+    "personalInfo": "వ్యక్తిగత సమాచారం",
+    "name": "పేరు",
+    "bio": "బయో",
+    "location": "ప్రదేశం",
+    "website": "వెబ్‌సైట్",
+    "updateProfile": "ప్రొఫైల్ నవీకరించండి",
+    "profileUpdated": "ప్రొఫైల్ విజయవంతంగా నవీకరించబడింది",
+    "preferences": "ఆదేశాలు",
+    "language": "భాష",
+    "theme": "థీమ్",
+    "notifications": "నోటిఫికేషన్‌లు",
+    "emailNotifications": "ఇమెయిల్ నోటిఫికేషన్‌లు",
+    "pushNotifications": "పుష్ నోటిఫికేషన్‌లు"
+  },
+  "settings": {
+    "title": "సెట్టింగ్‌లు",
+    "general": "సాధారణ",
+    "appearance": "రూపం",
+    "notifications": "నోటిఫికేషన్‌లు",
+    "privacy": "గోప్యత",
+    "language": "భాష",
+    "theme": "థీమ్",
+    "light": "వెలుగు",
+    "dark": "చీకటి",
+    "system": "సిస్టం",
+    "autoRefresh": "ఆటో రిఫ్రెష్",
+    "enableAutoRefresh": "ఆటో రిఫ్రెష్ ప్రారంభించండి",
+    "refreshInterval": "రిఫ్రెష్ విరామం (నిమిషాలు)",
+    "saveSettings": "సెట్టింగ్‌లు సేవ్ చేయండి",
+    "settingsSaved": "సెట్టింగ్‌లు విజయవంతంగా సేవ్ చేయబడ్డాయి"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "fr": "Français",
+    "de": "Deutsch",
+    "te": "తెలుగు",
+    "hi": "हिन्दी"
+  },
+  "realTime": {
+    "newContent": "కొత్త కంటెంట్ అందుబాటులో ఉంది",
+    "refreshing": "రిఫ్రెష్ అవుతోంది...",
+    "connectionStatus": "కనెక్షన్ స్థితి",
+    "connected": "కనెక్ట్ అయింది",
+    "disconnected": "కనెక్షన్ తెగిపోయింది",
+    "reconnecting": "మళ్లీ కనెక్ట్ అవుతోంది..."
+  }
+} 

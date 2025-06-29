@@ -1,0 +1,124 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "success": "Succès",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "close": "Fermer",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "refresh": "Actualiser",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent"
+  },
+  "auth": {
+    "signIn": "Se Connecter",
+    "signOut": "Se Déconnecter",
+    "username": "Nom d'utilisateur",
+    "password": "Mot de passe",
+    "email": "Email",
+    "invalidCredentials": "Nom d'utilisateur ou mot de passe invalide",
+    "signingIn": "Connexion en cours...",
+    "demoCredentials": "Demo: user / password"
+  },
+  "dashboard": {
+    "title": "Votre Flux Personnalisé",
+    "searchResults": "Résultats de recherche pour \"{{query}}\"",
+    "foundResults": "{{count}} résultats trouvés",
+    "showingCategories": "Affichage du contenu de vos catégories sélectionnées: {{categories}}",
+    "noContent": "Aucun contenu disponible",
+    "noContentDescription": "Essayez d'ajouter plus de catégories ou revenez plus tard pour du nouveau contenu.",
+    "noResults": "Aucun résultat trouvé",
+    "noResultsDescription": "Essayez d'ajuster vos termes de recherche ou parcourez différentes catégories.",
+    "endOfContent": "Vous avez atteint la fin du contenu.",
+    "loadingContent": "Chargement du contenu..."
+  },
+  "navigation": {
+    "dashboard": "Tableau de Bord",
+    "trending": "Tendances",
+    "favorites": "Favoris",
+    "profile": "Profil",
+    "settings": "Paramètres"
+  },
+  "sidebar": {
+    "categories": "Catégories",
+    "news": "Actualités",
+    "technology": "Technologie",
+    "science": "Science",
+    "business": "Entreprise",
+    "entertainment": "Divertissement",
+    "sports": "Sports",
+    "health": "Santé",
+    "politics": "Politique"
+  },
+  "topbar": {
+    "searchPlaceholder": "Rechercher du contenu...",
+    "notifications": "Notifications",
+    "toggleTheme": "Basculer le thème",
+    "userMenu": "Menu utilisateur"
+  },
+  "content": {
+    "readMore": "Lire Plus",
+    "share": "Partager",
+    "like": "J'aime",
+    "comment": "Commenter",
+    "bookmark": "Marquer",
+    "published": "Publié {{date}}",
+    "author": "Par {{author}}",
+    "source": "Source: {{source}}"
+  },
+  "profile": {
+    "title": "Profil",
+    "personalInfo": "Informations Personnelles",
+    "name": "Nom",
+    "bio": "Biographie",
+    "location": "Localisation",
+    "website": "Site web",
+    "updateProfile": "Mettre à Jour le Profil",
+    "profileUpdated": "Profil mis à jour avec succès",
+    "preferences": "Préférences",
+    "language": "Langue",
+    "theme": "Thème",
+    "notifications": "Notifications",
+    "emailNotifications": "Notifications par Email",
+    "pushNotifications": "Notifications Push"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "general": "Général",
+    "appearance": "Apparence",
+    "notifications": "Notifications",
+    "privacy": "Confidentialité",
+    "language": "Langue",
+    "theme": "Thème",
+    "light": "Clair",
+    "dark": "Sombre",
+    "system": "Système",
+    "autoRefresh": "Actualisation Automatique",
+    "enableAutoRefresh": "Activer l'actualisation automatique",
+    "refreshInterval": "Intervalle d'actualisation (minutes)",
+    "saveSettings": "Enregistrer les Paramètres",
+    "settingsSaved": "Paramètres enregistrés avec succès"
+  },
+  "languages": {
+    "en": "English",
+    "es": "Español",
+    "fr": "Français",
+    "de": "Deutsch",
+    "te": "తెలుగు",
+    "hi": "हिन्दी"
+  },
+  "realTime": {
+    "newContent": "Nouveau contenu disponible",
+    "refreshing": "Actualisation...",
+    "connectionStatus": "Statut de Connexion",
+    "connected": "Connecté",
+    "disconnected": "Déconnecté",
+    "reconnecting": "Reconnexion..."
+  }
+} 

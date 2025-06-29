@@ -2,7 +2,7 @@
 
 ## 📂 GitHub Repository
 
-[https://github.com/your-username/personalized-dashboard](https://github.com/your-username/personalized-dashboard)
+https://github.com/Sudheer2410/personalized-dashboard
 
 A modern, responsive personalized content dashboard built with Next.js, React, TypeScript, Redux Toolkit, and Tailwind CSS. This application provides a curated content feed based on user preferences with features like dark mode, search functionality, favorites management, and infinite scroll.
 
@@ -40,7 +40,7 @@ A modern, responsive personalized content dashboard built with Next.js, React, T
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/personalized-dashboard.git
+   git clone https://github.com/Sudheer2410/personalized-dashboard
    cd personalized-dashboard
    ```
 
@@ -203,7 +203,7 @@ The app can be deployed to any platform that supports Next.js:
 - [ ] Advanced caching strategies
 - [ ] Analytics integration
 
-## 🤝 Contributing
+ Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -215,7 +215,7 @@ The app can be deployed to any platform that supports Next.js:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+
 
 - [Next.js](https://nextjs.org/) for the amazing React framework
 - [Tailwind CSS](https://tailwindcss.com/) for the utility-first CSS framework
@@ -225,10 +225,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [News API](https://newsapi.org/) for real-time news content
 - [TMDB](https://www.themoviedb.org/) for movie data and posters
 
-## 📞 Support
-
-If you have any questions or need help, please open an issue on GitHub or contact the development team.
 
 ---
 
-**Built with ❤️ using modern web technologies and real APIs**
+

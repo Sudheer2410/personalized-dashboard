@@ -64,7 +64,7 @@ export const fetchContent = createAsyncThunk(
     console.log('Fetching content for categories:', categories, 'page:', page);
     
     try {
-      let allContent: ContentItem[] = [];
+      const allContent: ContentItem[] = [];
       
       // Fetch news for non-entertainment categories (RSS feeds - no rate limits)
       const newsCategories = categories.filter(cat => cat !== 'entertainment');
@@ -112,7 +112,7 @@ export const fetchContent = createAsyncThunk(
       return await mockApi.fetchContent(categories, page);
       
     } catch (error) {
-      console.log('API error, falling back to mock data:', error);
+      console.error('Content fetch error:', error);
       return await mockApi.fetchContent(categories, page);
     }
   }
@@ -121,7 +121,7 @@ export const fetchContent = createAsyncThunk(
 // Fetch personalized recommendations with caching
 export const fetchRecommendations = createAsyncThunk(
   'content/fetchRecommendations',
-  async (page: number = 1, { getState }) => {
+  async (page: number = 1, { getState }: { getState: () => { content: ContentState } }) => {
     const state = getState() as { content: ContentState };
     const { lastFetched, cacheDuration, recommendations } = state.content;
     
@@ -148,7 +148,10 @@ export const fetchRecommendations = createAsyncThunk(
 // Fetch social media posts with caching
 export const fetchSocialPosts = createAsyncThunk(
   'content/fetchSocialPosts',
-  async ({ hashtag, platform, category }: { hashtag?: string; platform?: 'twitter' | 'instagram' | 'linkedin'; category?: string } = {}, { getState }) => {
+  async (
+    { hashtag, platform, category }: { hashtag?: string; platform?: 'twitter' | 'instagram' | 'linkedin'; category?: string } = {},
+    { getState }: { getState: () => { content: ContentState } }
+  ) => {
     const state = getState() as { content: ContentState };
     const { lastFetched, cacheDuration, socialPosts } = state.content;
     

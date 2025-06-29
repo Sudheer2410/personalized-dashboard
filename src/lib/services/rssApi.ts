@@ -330,10 +330,10 @@ const fetchWithTimeout = async (url: string, timeout: number = 3000): Promise<{ 
 };
 
 // Utility to ensure unique IDs for all mock RSS data items
-function getUniqueMockRssData(category: string) {
+function getUniqueMockRssData(category: string): RSSItem[] {
   const timestamp = Date.now();
   const baseData = MOCK_RSS_DATA[category as keyof typeof MOCK_RSS_DATA] || [];
-  return baseData.map((item, idx) => ({
+  return baseData.map((item: RSSItem, idx: number) => ({
     ...item,
     id: `${item.id}-${timestamp}-${idx}`
   }));
@@ -405,7 +405,7 @@ export const rssApi = {
     } catch (error) {
       console.error('Failed to fetch RSS news, using mock data:', error);
       // Return mock data as final fallback
-      let mockNews: RSSItem[] = [];
+      const mockNews: RSSItem[] = [];
       for (const category of categories) {
         const mockData = getUniqueMockRssData(category);
         mockNews.push(...mockData);

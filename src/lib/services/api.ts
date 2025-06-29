@@ -8,7 +8,7 @@ const apiCache = new Map();
 const CACHE_DURATION = 30 * 60 * 1000; // 30 minutes
 
 // Cache helper functions
-const getCacheKey = (endpoint: string, params: any) => {
+const getCacheKey = (endpoint: string, params: Record<string, unknown>) => {
   return `${endpoint}-${JSON.stringify(params)}`;
 };
 
@@ -20,12 +20,22 @@ const getFromCache = (key: string) => {
   return null;
 };
 
-const setCache = (key: string, data: any) => {
+const setCache = (key: string, data: unknown) => {
   apiCache.set(key, {
     data,
     timestamp: Date.now()
   });
 };
+
+// TMDB Movie type
+interface TMDBMovie {
+  id: number;
+  title: string;
+  overview: string;
+  poster_path?: string;
+  release_date: string;
+  vote_average: number;
+}
 
 // News API service (now using RSS feeds)
 export const newsApi = {
@@ -40,7 +50,7 @@ export const newsApi = {
       }
 
       // Fetch news from RSS feeds
-      const newsData = await rssApi.fetchNews(categories, page);
+      const newsData = await rssApi.fetchNews(categories);
       
       // Cache the results
       setCache(cacheKey, newsData);
@@ -66,7 +76,7 @@ export const newsApi = {
       }
 
       // Search RSS feeds
-      const searchResults = await rssApi.searchNews(query, page);
+      const searchResults = await rssApi.searchNews(query);
       
       // Cache the results
       setCache(cacheKey, searchResults);
@@ -104,7 +114,7 @@ export const tmdbApi = {
       const data = await response.json();
       console.log('TMDB response:', data);
       
-      const movies = data.results.map((movie: any, index: number) => ({
+      const movies = data.results.map((movie: TMDBMovie, index: number) => ({
         id: `movie-${Date.now()}-${page}-${index}`,
         title: movie.title,
         description: movie.overview || 'No description available',
@@ -146,7 +156,7 @@ export const tmdbApi = {
       
       const data = await response.json();
       
-      return data.results.map((movie: any, index: number) => ({
+      return data.results.map((movie: TMDBMovie, index: number) => ({
         id: `movie-search-${Date.now()}-${page}-${index}`,
         title: movie.title,
         description: movie.overview || 'No description available',

@@ -12,7 +12,7 @@ interface RealTimeNotificationProps {
 
 export function RealTimeNotification({ onRefresh }: RealTimeNotificationProps) {
   const [showNotification, setShowNotification] = useState(false);
-  const [newContent, setNewContent] = useState<any>(null);
+  const [newContent, setNewContent] = useState<{ title: string; summary: string; publishedAt: string } | null>(null);
   const [connectionStatus, setConnectionStatus] = useState(webSocketService.getConnectionStatus());
   const [showApiWarning, setShowApiWarning] = useState(false);
   const { t } = useTranslation();
@@ -22,7 +22,7 @@ export function RealTimeNotification({ onRefresh }: RealTimeNotificationProps) {
     webSocketService.connect();
 
     // Listen for new content
-    const handleNewContent = (content: any) => {
+    const handleNewContent = (content: { title: string; summary: string; publishedAt: string }) => {
       setNewContent(content);
       setShowNotification(true);
       
@@ -33,7 +33,7 @@ export function RealTimeNotification({ onRefresh }: RealTimeNotificationProps) {
     };
 
     // Listen for connection status changes
-    const handleConnectionStatus = (status: any) => {
+    const handleConnectionStatus = (status: typeof connectionStatus) => {
       setConnectionStatus(status);
     };
 
@@ -65,13 +65,9 @@ export function RealTimeNotification({ onRefresh }: RealTimeNotificationProps) {
         const data = await response.json();
         
         if (data.usingCachedData) {
-          setNotification({
-            type: 'info',
-            message: 'Using cached RSS data to optimize performance',
-            duration: 5000
-          });
+          setShowNotification(true);
         }
-      } catch (error) {
+      } catch {
         console.log('Could not check API status');
       }
     };

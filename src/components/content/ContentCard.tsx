@@ -185,21 +185,21 @@ export function ContentCard({ item, onCardClick, showRecommendationReason = fals
       </div>
 
       {/* Content */}
-      <div className="p-6 flex flex-col flex-1">
+      <div className="p-4 sm:p-6 flex flex-col flex-1">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-sm text-gray-500 dark:text-gray-400">
+          <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
             {isSocial ? item.author : item.source}
           </span>
-          <span className="text-sm text-gray-500 dark:text-gray-400">
+          <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
             {isMovie && item.releaseYear ? item.releaseYear : isSocial ? formatTimeAgo(item.publishedAt) : formatDate(item.publishedAt)}
           </span>
         </div>
         
-        <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2 line-clamp-2 text-lg">
+        <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2 line-clamp-2 text-base sm:text-lg">
           {item.title}
         </h3>
         
-        <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-3 mb-4 flex-1">
+        <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm line-clamp-3 mb-4 flex-1">
           {item.description}
         </p>
 
@@ -217,7 +217,7 @@ export function ContentCard({ item, onCardClick, showRecommendationReason = fals
 
         {/* Social Media Stats */}
         {showSocialStats && isSocial && (item.likes || item.retweets || item.comments) && (
-          <div className="mb-3 flex items-center space-x-4 text-xs text-gray-500 dark:text-gray-400">
+          <div className="mb-3 flex items-center space-x-3 sm:space-x-4 text-xs text-gray-500 dark:text-gray-400">
             {item.likes && (
               <div className="flex items-center space-x-1">
                 <HeartIcon className="w-3 h-3" />
@@ -282,7 +282,7 @@ export function ContentCard({ item, onCardClick, showRecommendationReason = fals
         <button
           onClick={isMusic ? handlePlayNow : handleReadMore}
           disabled={isPlayLoading}
-          className={`mt-auto w-full py-2 px-4 rounded-lg transition-colors font-medium text-sm flex items-center justify-center space-x-2 ${
+          className={`mt-auto w-full py-2.5 sm:py-2 px-4 rounded-lg transition-colors font-medium text-sm flex items-center justify-center space-x-2 ${
             isMusic 
               ? 'bg-green-600 hover:bg-green-700 text-white' 
               : 'bg-blue-600 hover:bg-blue-700 text-white'

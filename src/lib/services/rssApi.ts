@@ -297,6 +297,12 @@ const fetchWithTimeout = async (url: string, category: string, timeout: number =
     const items = xmlDoc.querySelectorAll('item');
     const rssItems: RSSItem[] = [];
 
+    // Generate a unique base timestamp and random component for this batch
+    const batchTimestamp = Date.now();
+    const randomComponent = Math.random().toString(36).substring(2, 8);
+    // Create a hash from the URL to make it part of the unique ID
+    const urlHash = url.split('/').pop()?.replace(/[^a-zA-Z0-9]/g, '') || 'feed';
+    
     items.forEach((item, index) => {
       const title = item.querySelector('title')?.textContent?.trim() || '';
       const description = item.querySelector('description')?.textContent?.trim() || '';
@@ -307,8 +313,11 @@ const fetchWithTimeout = async (url: string, category: string, timeout: number =
       const imageUrl = extractImageUrl(item) || getCategoryImage(category, index);
       
       if (title && description) {
+        // Create a more unique ID using batch timestamp, random component, URL hash, category, and index
+        const uniqueId = `rss-${batchTimestamp}-${randomComponent}-${urlHash}-${category}-${index}`;
+        
         rssItems.push({
-          id: `rss-${Date.now()}-${index}`,
+          id: uniqueId,
           title,
           description,
           imageUrl,
@@ -332,10 +341,11 @@ const fetchWithTimeout = async (url: string, category: string, timeout: number =
 // Utility to ensure unique IDs for all mock RSS data items
 function getUniqueMockRssData(category: string): RSSItem[] {
   const timestamp = Date.now();
+  const randomComponent = Math.random().toString(36).substring(2, 8);
   const baseData = MOCK_RSS_DATA[category as keyof typeof MOCK_RSS_DATA] || [];
   return baseData.map((item: RSSItem, idx: number) => ({
     ...item,
-    id: `${item.id}-${timestamp}-${idx}`
+    id: `mock-${timestamp}-${randomComponent}-${category}-${idx}`
   }));
 }
 

@@ -628,6 +628,19 @@ class SpotifyApi {
       total: filteredTracks.length,
     };
   }
+
+  // Get popular Telugu songs from a known playlist
+  async getTeluguSongs(limit: number = 20): Promise<SpotifyTrack[]> {
+    // Hot Hits Telugu playlist ID
+    const playlistId = '37i9dQZF1DX0b1hHYQtJjp';
+    try {
+      const data = await this.makeRequest<{ items: Array<{ track: SpotifyTrack }> }>(`/playlists/${playlistId}/tracks?limit=${limit}`);
+      return data.items.map(item => item.track);
+    } catch (error) {
+      console.error('Error fetching Telugu songs:', error);
+      return [];
+    }
+  }
 }
 
 export const spotifyApi = new SpotifyApi(); 

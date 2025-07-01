@@ -59,6 +59,10 @@ class RecommendationsApi {
         throw new Error('TMDB API key not configured');
       }
 
+      // Generate a unique batch timestamp and random component for this recommendation fetch
+      const batchTimestamp = Date.now();
+      const randomComponent = Math.random().toString(36).substring(2, 8);
+
       // Get user's preferred genres
       const genreIds = await this.getGenreIds(userPreferences.genres);
       
@@ -86,7 +90,7 @@ class RecommendationsApi {
             if (recResponse.ok) {
               const recData = await recResponse.json();
               const movieRecs = recData.results.slice(0, 3).map((movie: MovieRecommendation, index: number) => ({
-                id: `movie-${movie.id}-${Date.now()}-${index}`,
+                id: `movie-${movie.id}-${batchTimestamp}-${randomComponent}-${index}`,
                 title: movie.title,
                 description: movie.overview,
                 imageUrl: movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : '/placeholder-movie.jpg',
@@ -118,7 +122,7 @@ class RecommendationsApi {
           if (response.ok) {
             const data = await response.json();
             const genreRecs = data.results.slice(0, 2).map((movie: MovieRecommendation, index: number) => ({
-              id: `movie-genre-${movie.id}-${Date.now()}-${index}`,
+              id: `movie-genre-${movie.id}-${batchTimestamp}-${randomComponent}-${index}`,
               title: movie.title,
               description: movie.overview,
               imageUrl: movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : '/placeholder-movie.jpg',
@@ -225,9 +229,13 @@ class RecommendationsApi {
   // Content Recommendations based on user interests
   async fetchContentRecommendations(): Promise<ContentItem[]> {
     try {
+      // Generate a unique batch timestamp and random component for this content fetch
+      const batchTimestamp = Date.now();
+      const randomComponent = Math.random().toString(36).substring(2, 8);
+      
       const mockContentData = [
         {
-          id: `content-1-${Date.now()}`,
+          id: `content-1-${batchTimestamp}-${randomComponent}`,
           title: 'The Future of AI in 2024',
           description: 'Exploring the latest developments in artificial intelligence and machine learning.',
           imageUrl: 'https://via.placeholder.com/400x250/667eea/ffffff?text=AI+Future',
@@ -239,7 +247,7 @@ class RecommendationsApi {
           recommendationReason: 'Based on your technology interests'
         },
         {
-          id: `content-2-${Date.now()}`,
+          id: `content-2-${batchTimestamp}-${randomComponent}`,
           title: 'Best Travel Destinations for 2024',
           description: 'Discover the most exciting travel destinations and hidden gems around the world.',
           imageUrl: 'https://via.placeholder.com/400x250/764ba2/ffffff?text=Travel',
@@ -251,7 +259,7 @@ class RecommendationsApi {
           recommendationReason: 'Matches your travel interests'
         },
         {
-          id: `content-3-${Date.now()}`,
+          id: `content-3-${batchTimestamp}-${randomComponent}`,
           title: 'Ultimate Food Guide: Street Food Around the World',
           description: 'A comprehensive guide to the best street food experiences globally.',
           imageUrl: 'https://via.placeholder.com/400x250/f093fb/ffffff?text=Food',
@@ -323,9 +331,13 @@ class RecommendationsApi {
 
   // Mock movie recommendations fallback
   private getMockMovieRecommendations(): ContentItem[] {
+    // Generate a unique batch timestamp and random component for this mock data
+    const batchTimestamp = Date.now();
+    const randomComponent = Math.random().toString(36).substring(2, 8);
+    
     return [
       {
-        id: `mock-movie-1-${Date.now()}`,
+        id: `mock-movie-1-${batchTimestamp}-${randomComponent}`,
         title: 'The Matrix Resurrections',
         description: 'Return to the world of The Matrix in this thrilling sequel.',
         imageUrl: 'https://via.placeholder.com/400x250/000000/00ff00?text=Matrix',
@@ -339,7 +351,7 @@ class RecommendationsApi {
         recommendationReason: 'Because you liked The Matrix'
       },
       {
-        id: `mock-movie-2-${Date.now()}`,
+        id: `mock-movie-2-${batchTimestamp}-${randomComponent}`,
         title: 'Dune: Part Two',
         description: 'The epic conclusion to Denis Villeneuve\'s adaptation of Frank Herbert\'s classic.',
         imageUrl: 'https://via.placeholder.com/400x250/8b4513/ffffff?text=Dune',
@@ -357,10 +369,14 @@ class RecommendationsApi {
 
   // Mock music recommendations fallback
   private getMockMusicRecommendations(): ContentItem[] {
+    // Generate a unique batch timestamp and random component for this mock data
+    const batchTimestamp = Date.now();
+    const randomComponent = Math.random().toString(36).substring(2, 8);
+    
     return [
       // Hindi Songs
       {
-        id: `hindi-1-${Date.now()}`,
+        id: `hindi-1-${batchTimestamp}-${randomComponent}`,
         title: 'Tum Hi Ho',
         description: 'Arijit Singh - Aashiqui 2',
         imageUrl: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&crop=center',
@@ -373,7 +389,7 @@ class RecommendationsApi {
         recommendationReason: 'Based on your love for romantic songs'
       },
       {
-        id: `hindi-2-${Date.now()}`,
+        id: `hindi-2-${batchTimestamp}-${randomComponent}`,
         title: 'Kesariya',
         description: 'Arijit Singh, Pritam - Brahmastra',
         imageUrl: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop&crop=center',
@@ -386,7 +402,7 @@ class RecommendationsApi {
         recommendationReason: 'Similar to your Bollywood music taste'
       },
       {
-        id: `hindi-3-${Date.now()}`,
+        id: `hindi-3-${batchTimestamp}-${randomComponent}`,
         title: 'Raataan Lambiyan',
         description: 'Jubin Nautiyal, Asees Kaur - Shershaah',
         imageUrl: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=400&h=400&fit=crop&crop=center',
@@ -399,7 +415,7 @@ class RecommendationsApi {
         recommendationReason: 'From your patriotic songs playlist'
       },
       {
-        id: `hindi-4-${Date.now()}`,
+        id: `hindi-4-${batchTimestamp}-${randomComponent}`,
         title: 'Chaleya',
         description: 'Arijit Singh, Shilpa Rao - Jawan',
         imageUrl: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&crop=center',
@@ -414,7 +430,7 @@ class RecommendationsApi {
       
       // Telugu Songs
       {
-        id: `telugu-1-${Date.now()}`,
+        id: `telugu-1-${batchTimestamp}-${randomComponent}`,
         title: 'Naatu Naatu',
         description: 'M.M. Keeravani, Rahul Sipligunj - RRR',
         imageUrl: 'https://images.unsplash.com/photo-1489599839928-6735c77f5536?w=400&h=400&fit=crop&crop=center',
@@ -427,7 +443,7 @@ class RecommendationsApi {
         recommendationReason: 'Oscar-winning Telugu folk song'
       },
       {
-        id: `telugu-2-${Date.now()}`,
+        id: `telugu-2-${batchTimestamp}-${randomComponent}`,
         title: 'Saami Saami',
         description: 'Mounika Yadav - Pushpa: The Rise',
         imageUrl: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&crop=center',
@@ -440,7 +456,7 @@ class RecommendationsApi {
         recommendationReason: 'Trending Telugu folk fusion'
       },
       {
-        id: `telugu-3-${Date.now()}`,
+        id: `telugu-3-${batchTimestamp}-${randomComponent}`,
         title: 'Srivalli',
         description: 'Sid Sriram - Pushpa: The Rise',
         imageUrl: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&crop=center',
@@ -455,7 +471,7 @@ class RecommendationsApi {
       
       // Tamil Songs
       {
-        id: `tamil-1-${Date.now()}`,
+        id: `tamil-1-${batchTimestamp}-${randomComponent}`,
         title: 'Kaavaalaa',
         description: 'Shilpa Rao, Anirudh Ravichander - Jailer',
         imageUrl: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=400&h=400&fit=crop&crop=center',
@@ -468,7 +484,7 @@ class RecommendationsApi {
         recommendationReason: 'Viral Tamil dance number'
       },
       {
-        id: `tamil-2-${Date.now()}`,
+        id: `tamil-2-${batchTimestamp}-${randomComponent}`,
         title: 'Pathala Pathala',
         description: 'Kamal Haasan, Shankar Mahadevan - Vikram',
         imageUrl: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=400&h=400&fit=crop&crop=center',
@@ -481,7 +497,7 @@ class RecommendationsApi {
         recommendationReason: 'Action-packed Tamil thriller song'
       },
       {
-        id: `tamil-3-${Date.now()}`,
+        id: `tamil-3-${batchTimestamp}-${randomComponent}`,
         title: 'Hukum - Thalaivar',
         description: 'Anirudh Ravichander - Jailer',
         imageUrl: 'https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=400&h=400&fit=crop&crop=center',
@@ -496,7 +512,7 @@ class RecommendationsApi {
       
       // English Songs (for variety)
       {
-        id: `english-1-${Date.now()}`,
+        id: `english-1-${batchTimestamp}-${randomComponent}`,
         title: 'Blinding Lights',
         description: 'The Weeknd - After Hours',
         imageUrl: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=400&fit=crop&crop=center',
@@ -509,7 +525,7 @@ class RecommendationsApi {
         recommendationReason: 'Based on your love for The Weeknd'
       },
       {
-        id: `english-2-${Date.now()}`,
+        id: `english-2-${batchTimestamp}-${randomComponent}`,
         title: 'Shape of You',
         description: 'Ed Sheeran - ÷ (Divide)',
         imageUrl: 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop&crop=center',

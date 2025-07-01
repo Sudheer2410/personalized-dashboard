@@ -43,7 +43,9 @@
     "trending": "ट्रेंडिंग",
     "favorites": "पसंदीदा",
     "profile": "प्रोफ़ाइल",
-    "settings": "सेटिंग्स"
+    "settings": "सेटिंग्स",
+    "recommendations": "सिफारिशें",
+    "social": "सोशल"
   },
   "sidebar": {
     "categories": "श्रेणियां",

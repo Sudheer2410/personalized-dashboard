@@ -13,6 +13,7 @@ import { RealTimeNotification } from '@/components/RealTimeNotification';
 import { useAppSelector, useAppDispatch } from '@/lib/hooks';
 import { fetchContent, clearContent, fetchRecommendations, fetchSocialPosts } from '@/lib/slices/contentSlice';
 import { ContentItem } from '@/lib/slices/contentSlice';
+import spotifyApi, { SpotifyTrack } from '@/lib/services/spotifyApi';
 
 export default function DashboardPage() {
   const { data: session, status } = useSession();
@@ -27,6 +28,8 @@ export default function DashboardPage() {
   const [selectedItem, setSelectedItem] = useState<ContentItem | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [initialLoadComplete, setInitialLoadComplete] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [teluguSongs, setTeluguSongs] = useState<ContentItem[]>([]);
   
   const observer = useRef<IntersectionObserver | null>(null);
 
@@ -75,6 +78,37 @@ export default function DashboardPage() {
     }
   }, [categories, dispatch, session, initialLoadComplete, items.length, recommendations.length, socialPosts.length, lastFetched, cacheDuration]);
 
+  // Fetch Telugu songs from Spotify after authentication
+  useEffect(() => {
+    async function fetchTeluguSongs() {
+      if (status === 'authenticated') {
+        try {
+          const tracks: SpotifyTrack[] = await spotifyApi.getTeluguSongs(12);
+          // Map SpotifyTrack to ContentItem for ContentCard
+          const mapped = tracks.map((track, idx) => ({
+            id: `spotify-telugu-${track.id}`,
+            title: track.name,
+            description: `By ${track.artist}`,
+            imageUrl: track.albumArt,
+            category: 'music',
+            source: 'Spotify',
+            publishedAt: '',
+            url: track.spotifyUrl,
+            type: 'recommendation',
+            rating: undefined,
+            releaseYear: undefined,
+            recommendationReason: 'Hot Hits Telugu',
+            author: track.artist,
+          }));
+          setTeluguSongs(mapped);
+        } catch (e) {
+          setTeluguSongs([]);
+        }
+      }
+    }
+    fetchTeluguSongs();
+  }, [status]);
+
   // Infinite scroll setup
   const lastElementCallback = useCallback((node: HTMLDivElement) => {
     if (loading) return;
@@ -108,7 +142,7 @@ export default function DashboardPage() {
   };
 
   // Combine all content for display
-  const allContent = [...items, ...recommendations, ...socialPosts];
+  const allContent = [...items, ...recommendations, ...socialPosts, ...teluguSongs];
   const displayItems = searchQuery ? searchResults : allContent;
 
   // Show loading while checking authentication
@@ -127,16 +161,16 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
-      <Sidebar />
+      <Sidebar isMobileMenuOpen={isMobileMenuOpen} onCloseMobileMenu={() => setIsMobileMenuOpen(false)} />
       <div className="lg:pl-64">
-        <Topbar />
+        <Topbar onHamburgerClick={() => setIsMobileMenuOpen(true)} />
         
-        <main className="p-6">
+        <main className="p-4 sm:p-6 pt-20 lg:pt-6">
           {/* Header */}
-          <div className="mb-8">
-            <div className="flex items-center justify-between mb-4">
+          <div className="mb-6 lg:mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
               <div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white">
                   {t('dashboard.title')}
                 </h1>
               </div>
@@ -147,7 +181,7 @@ export default function DashboardPage() {
                 <button
                   onClick={handleRefresh}
                   disabled={loading}
-                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white rounded-lg transition-colors"
+                  className="px-3 sm:px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white rounded-lg transition-colors text-sm sm:text-base"
                 >
                   {loading ? t('common.loading') : t('common.refresh')}
                 </button>
@@ -162,12 +196,12 @@ export default function DashboardPage() {
               animate={{ opacity: 1, y: 0 }}
               className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg"
             >
-              <p className="text-red-800 dark:text-red-200">{error}</p>
+              <p className="text-red-800 dark:text-red-200 text-sm sm:text-base">{error}</p>
             </motion.div>
           )}
 
           {/* Content Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             {displayItems.map((item, index) => {
               return (
                 <div
@@ -201,39 +235,45 @@ export default function DashboardPage() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-center py-8"
+              className="text-center py-8 text-gray-500 dark:text-gray-400"
             >
-              <p className="text-gray-500 dark:text-gray-400">
-                {t('dashboard.endOfContent')}
-              </p>
+              <p className="text-sm sm:text-base">{t('dashboard.endOfContent')}</p>
             </motion.div>
           )}
 
-          {/* Empty State */}
-          {!loading && displayItems.length === 0 && (
+          {/* Empty state */}
+          {!loading && displayItems.length === 0 && !error && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               className="text-center py-12"
             >
-              <div className="text-gray-400 dark:text-gray-500 mb-4">
-                <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                </svg>
+              <div className="max-w-md mx-auto">
+                <div className="w-16 h-16 bg-gray-200 dark:bg-gray-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
+                  {t('dashboard.noContent')}
+                </h3>
+                <p className="text-gray-500 dark:text-gray-400 text-sm sm:text-base mb-4">
+                  {t('dashboard.noContentDescription')}
+                </p>
+                <button
+                  onClick={handleRefresh}
+                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors text-sm sm:text-base"
+                >
+                  {t('common.refresh')}
+                </button>
               </div>
-              <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">
-                {t('dashboard.noContent')}
-              </h3>
-              <p className="text-gray-500 dark:text-gray-400">
-                {t('dashboard.noContentDescription')}
-              </p>
             </motion.div>
           )}
         </main>
       </div>
 
       {/* Content Details Modal */}
-      {selectedItem && (
+      {isModalOpen && selectedItem && (
         <ContentDetailsModal
           item={selectedItem}
           isOpen={isModalOpen}

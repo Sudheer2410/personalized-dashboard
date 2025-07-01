@@ -57,9 +57,10 @@ export default function SettingsPage() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       <Sidebar />
-      <Topbar />
-      
-      <main className="ml-64 pt-16 p-6">
+      <div className="lg:pl-64">
+        <Topbar />
+        
+        <main className="p-4 sm:p-6 pt-20 lg:pt-6">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <motion.div
@@ -196,7 +197,7 @@ export default function SettingsPage() {
                   className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
                 >
                   {languages.map((lang) => (
-                    <option key={lang.code} value={lang.code} className="dark:bg-gray-700 dark:text-white">
+                    <option key={lang.code} value={lang.code} className="bg-white text-gray-900 dark:bg-gray-700 dark:text-white">
                       {lang.name}
                     </option>
                   ))}
@@ -241,6 +242,7 @@ export default function SettingsPage() {
           </div>
         </div>
       </main>
+    </div>
 
       {/* Category Modal */}
       {showCategoryModal && (

@@ -99,23 +99,31 @@ export const tmdbApi = {
     }
 
     try {
-      console.log('Fetching movies from TMDB...');
-      const response = await fetch(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${TMDB_API_KEY}&page=${page}&language=en-US`
+      console.log('Fetching Telugu and English movies from TMDB...');
+      // Fetch Telugu movies
+      const teluguRes = await fetch(
+        `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&with_original_language=te&page=${page}&language=te-IN`
       );
-      
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('TMDB API error:', response.status, errorText);
+      // Fetch English movies
+      const englishRes = await fetch(
+        `https://api.themoviedb.org/3/discover/movie?api_key=${TMDB_API_KEY}&with_original_language=en&page=${page}&language=en-US`
+      );
+
+      if (!teluguRes.ok && !englishRes.ok) {
+        const errorText = await teluguRes.text() + ' | ' + await englishRes.text();
+        console.error('TMDB API error:', teluguRes.status, englishRes.status, errorText);
         console.log('Falling back to mock data due to TMDB API error');
         return mockApi.fetchContent(['entertainment'], page);
       }
-      
-      const data = await response.json();
-      console.log('TMDB response:', data);
-      
-      const movies = data.results.map((movie: TMDBMovie, index: number) => ({
-        id: `movie-${Date.now()}-${page}-${index}`,
+
+      const teluguData = teluguRes.ok ? await teluguRes.json() : { results: [] };
+      const englishData = englishRes.ok ? await englishRes.json() : { results: [] };
+
+      // Generate a unique batch timestamp for this movie fetch
+      const batchTimestamp = Date.now();
+
+      const teluguMovies = teluguData.results.map((movie: TMDBMovie, index: number) => ({
+        id: `movie-te-${batchTimestamp}-${page}-${index}`,
         title: movie.title,
         description: movie.overview || 'No description available',
         imageUrl: movie.poster_path 
@@ -130,7 +138,25 @@ export const tmdbApi = {
         releaseYear: new Date(movie.release_date).getFullYear(),
       }));
 
-      console.log('Processed movies:', movies);
+      const englishMovies = englishData.results.map((movie: TMDBMovie, index: number) => ({
+        id: `movie-en-${batchTimestamp}-${page}-${index}`,
+        title: movie.title,
+        description: movie.overview || 'No description available',
+        imageUrl: movie.poster_path 
+          ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+          : 'https://images.unsplash.com/photo-1489599837791-8b0c4c0b0b0b?w=400',
+        category: 'entertainment',
+        source: 'TMDB',
+        publishedAt: movie.release_date,
+        url: `https://www.themoviedb.org/movie/${movie.id}`,
+        type: 'recommendation' as const,
+        rating: movie.vote_average,
+        releaseYear: new Date(movie.release_date).getFullYear(),
+      }));
+
+      // Combine and return both
+      const movies = [...teluguMovies, ...englishMovies];
+      console.log('Processed Telugu and English movies:', movies);
       return movies;
     } catch (error) {
       console.error('TMDB API error:', error);
@@ -156,8 +182,11 @@ export const tmdbApi = {
       
       const data = await response.json();
       
+      // Generate a unique batch timestamp for this search
+      const batchTimestamp = Date.now();
+      
       return data.results.map((movie: TMDBMovie, index: number) => ({
-        id: `movie-search-${Date.now()}-${page}-${index}`,
+        id: `movie-search-${batchTimestamp}-${page}-${index}`,
         title: movie.title,
         description: movie.overview || 'No description available',
         imageUrl: movie.poster_path 

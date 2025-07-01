@@ -27,9 +27,10 @@ export default function FavoritesPage() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       <Sidebar />
-      <Topbar />
-      
-      <main className="ml-64 pt-16 p-6 transition-colors duration-300">
+      <div className="lg:pl-64">
+        <Topbar />
+        
+        <main className="p-4 sm:p-6 pt-20 lg:pt-6 transition-colors duration-300">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <motion.div
@@ -92,6 +93,7 @@ export default function FavoritesPage() {
           )}
         </div>
       </main>
+    </div>
 
       {/* Content Details Modal */}
       <ContentDetailsModal

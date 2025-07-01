@@ -81,8 +81,11 @@ class WebSocketService {
       'Political Developments Around the World'
     ];
 
+    // Generate a unique ID using timestamp and random number to avoid duplicates
+    const uniqueId = `content_${Date.now()}_${Math.floor(Math.random() * 10000)}`;
+
     return {
-      id: `content_${Date.now()}`,
+      id: uniqueId,
       title: titles[Math.floor(Math.random() * titles.length)],
       category: categories[Math.floor(Math.random() * categories.length)],
       summary: 'This is a simulated real-time content update for demonstration purposes.',

@@ -144,38 +144,12 @@ The project uses Tailwind CSS v4 with custom configurations for:
 - Responsive breakpoints
 - Color palette extensions
 
-## 📱 Responsive Design
 
-The dashboard is fully responsive with breakpoints:
-- **Mobile**: < 768px (single column layout)
-- **Tablet**: 768px - 1024px (two column layout)
-- **Desktop**: > 1024px (multi-column layout)
-
-## 🧪 Testing
-
-### Running Tests
-```bash
-# Unit tests
-npm test
-
-# E2E tests
-npm run cypress:open
-
-# Test coverage
-npm run test:coverage
 ```
 
-### Test Structure
-- **Unit Tests**: Component testing with React Testing Library
-- **Integration Tests**: Redux state and API integration
-- **E2E Tests**: User journey testing with Cypress
 
-## 🚀 Deployment
 
-### Vercel (Recommended)
-1. Connect your GitHub repository to Vercel
-2. Configure environment variables in Vercel dashboard
-3. Deploy automatically on push to main branch
+
 
 ### Other Platforms
 The app can be deployed to any platform that supports Next.js:
@@ -196,33 +170,12 @@ The app can be deployed to any platform that supports Next.js:
 - [ ] YouTube API integration
 - [ ] Spotify API integration
 
-### Technical Improvements
-- [ ] Performance optimization
-- [ ] SEO improvements
-- [ ] PWA capabilities
-- [ ] Advanced caching strategies
-- [ ] Analytics integration
+
 
  Contributing
 
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 
-
-- [Next.js](https://nextjs.org/) for the amazing React framework
-- [Tailwind CSS](https://tailwindcss.com/) for the utility-first CSS framework
-- [Redux Toolkit](https://redux-toolkit.js.org/) for state management
-- [Framer Motion](https://www.framer.com/motion/) for animations
-- [Heroicons](https://heroicons.com/) for beautiful icons
-- [News API](https://newsapi.org/) for real-time news content
 - [TMDB](https://www.themoviedb.org/) for movie data and posters
 
 
